@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { TimeRecorderComponent } from './time-recorder/time-recorder.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TimeRecorderComponent
   ],
   imports: [
     BrowserModule
