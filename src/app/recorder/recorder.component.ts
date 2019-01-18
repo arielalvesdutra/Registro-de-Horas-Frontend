@@ -12,4 +12,11 @@ export class RecorderComponent implements OnInit {
   ngOnInit() {
   }
 
+  startTimer() {
+    console.log(`Iniciando o temporizador...`)
+  }
+
+  stopTimer() {
+    console.log(`Parando o temporizador...`)
+  }
 }
