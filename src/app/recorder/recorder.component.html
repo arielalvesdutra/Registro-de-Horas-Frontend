@@ -3,15 +3,25 @@
   <div class="form-row">
     <div class="col">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Digite o título do seu registro.">
-
+        <input #recordName [disabled]="recordStarted === true" type="text" class="form-control" 
+          placeholder="Digite o título do seu registro.">
       </div>
     </div>
   </div>
   <div class="form-row">
     <div class="col-12">
-      <button (click)="startTimer()" class="btn btn-success col-4 col-md-3">Iniciar</button>
-      <button (click)="stopTimer()" class="btn btn-danger col-4 col-md-3">Encerrar</button>
+      <button [disabled]="recordStarted === true" (click)="startTimer(recordName.value)" 
+        class="btn btn-success col-4 col-md-3">Iniciar</button>
+      <button [disabled]="recordStarted === false" (click)="stopTimer()" 
+        class="btn btn-danger col-4 col-md-3">Encerrar</button>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col">
+      <div *ngIf="recordTitle"> Nome: {{ recordTitle }}</div>
+      <div *ngIf="recordInit"> - Inicio: {{ recordInit }}</div>
+      <div *ngIf="recordEnd"> - Fim: {{ recordEnd }}</div>
     </div>
   </div>
 </div>
