@@ -25,3 +25,25 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Instalando bootstrap
+
+- `npm i --save bootstrap@4.2.1 jquery`
+- Colocar o caminhos node_modules do bootstrap e jquery no app.module:
+    
+    "styles": [
+    "styles.css",
+    "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+  ],
+  "scripts": [
+    "../node_modules/jquery/dist/jquery.min.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+  ],
+
+## Usando Ng-Bootstrap
+
+- ` npm install --save @ng-bootstrap/ng-bootstrap`
+- `npm install bootstrap@4.0.0-alpha.6`
+- Adicioonar bootstrap no angular.json 
+- importar no modules: "import {NgbModule} from '@ng-bootstrap/ng-bootstrap';"
