@@ -1,27 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    /* background-image: linear-gradient(to right, #252c36, #232a38, #21283a, #22263c, #23233d); */
-    /* background-image: linear-gradient(to right, #333b47, #2d3647, #283044, #252941, #23233d); */
     background-image: linear-gradient(to right, #464a51, #3b404d, #323748, #2a2d43, #23233d);
     display: flex;
-    /* height: 100vh; */
-    /* height: 100%; */
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    margin: 0;
+    padding: 0;
 }
 
-.time-recorder {
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0; padding: 0;
+  }
+
+/* app-recorder {
+    width: 100%;
+} */
+
+/* .container {
+    background-color: white;
+    border-radius: 4px;
+    margin-top: 20px;
+    
+    /* margin-left: 20px;
+    margin-bottom: 20px;*
+    padding: 10px;   
+    /* width: 80%; */
+    /* display: block; */
+    /* display: inline-block; */
+    /* display: grid; */
+
+
+    /* width: 100%; */
+    /* display: flex; */
+    /* justify-content: cesnter; */
+    /* width: 20em; *
+    flex-basis:  auto;
+} */
+
+/* .time-recorder {
     margin-top: 50px;
-    /* color: white; */
     background-color: #ccc;
     border-radius: 8px;
     min-height: 600px;
-    /* height: 600px; */
-
     width: 700px;
+    /* display: inline-block; *
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    flex-basis:  auto;
+} */
 
-    /* display: flex; */
-    /* justify-content: scenter; */
+.time-recorder {
+    margin-top: 50px;
+    background-color: #ccc;
+    border-radius: 8px;
+    width: 800px;
+    /* border: 5px solid rebeccapurple; */
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items:  center;    
+}
+
+.recorder {
+    margin-top: 10px;
+    /* border: 5px solid cornflowerblue; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.recorder .container {
+    background-color: white;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 10px;
+    width: 80%;
 }
 
 @media (max-width: 700px) {
@@ -29,6 +88,13 @@ body {
         width: 600px;
     }
 }
+
+@media (max-width: 610px) {
+    .time-recorder {
+        width: 400px;
+    }
+}
+
 
 @media (max-width: 400px) {
     .time-recorder {
