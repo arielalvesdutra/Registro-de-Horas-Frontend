@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule} from '@angular/forms'
+
 // import { FlexModule, FlexStyleBuilder, FlexLayoutModule } from '@angular/flex-layout'
 
 import { AppComponent } from './app.component';
@@ -15,6 +17,7 @@ import { RecorderComponent } from './recorder/recorder.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule
     // FlexModule,
     // FlexLayoutModule
     // FlexLayoutModule

@@ -3,25 +3,32 @@
   <div class="form-row">
     <div class="col">
       <div class="form-group">
-        <input #recordName [disabled]="recordStarted === true" type="text" class="form-control" 
-          placeholder="Digite o título do seu registro.">
+        <input #recordName="ngModel" [(ngModel)]="recordTitle" 
+          [disabled]="recordStarted === true" type="text" class="form-control"
+          placeholder="Digite o título do seu registro." required>
       </div>
     </div>
   </div>
   <div class="form-row">
     <div class="col-12">
-      <button [disabled]="recordStarted === true" (click)="startTimer(recordName.value)" 
-        class="btn btn-success col-4 col-md-3">Iniciar</button>
-      <button [disabled]="recordStarted === false" (click)="stopTimer()" 
-        class="btn btn-danger col-4 col-md-3">Encerrar</button>
+      <button [disabled]="recordStarted === true || recordName.invalid" (click)="startTimer(recordName.value)" class="btn btn-success col-4 col-md-3">Iniciar</button>
+      <button [disabled]="recordStarted === false" (click)="stopTimer()" class="btn btn-danger col-4 col-md-3">Encerrar</button>
     </div>
   </div>
 
   <div class="form-row">
     <div class="col">
-      <div *ngIf="recordTitle"> Nome: {{ recordTitle }}</div>
-      <div *ngIf="recordInit"> - Inicio: {{ recordInit }}</div>
-      <div *ngIf="recordEnd"> - Fim: {{ recordEnd }}</div>
+      <!-- <div *ngIf="recordTitle"> Nome: {{ recordTitle }}</div>
+      <div *ngIf="recordInit"> - Inicio: {{ recordInit }}</div> -->
+      <div *ngIf="recordTitle && recordInit">
+        <div>
+          - Nome: {{ recordTitle }}
+        </div>
+        <div>
+          - Inicio: {{ recordInit }}
+        </div>
+        <div *ngIf="recordEnd"> - Fim: {{ recordEnd }}</div>
+      </div>
     </div>
   </div>
 </div>
