@@ -15,20 +15,31 @@
       <button [disabled]="recordStarted === false" (click)="stopTimer()" class="btn btn-danger col-4 col-md-3">Encerrar</button>
     </div>
   </div>
-
-  <div class="form-row">
-    <div class="col">
-      <!-- <div *ngIf="recordTitle"> Nome: {{ recordTitle }}</div>
-      <div *ngIf="recordInit"> - Inicio: {{ recordInit }}</div> -->
-      <div *ngIf="recordTitle && recordInit">
-        <div>
-          - Nome: {{ recordTitle }}
-        </div>
-        <div>
-          - Inicio: {{ recordInit }}
-        </div>
-        <div *ngIf="recordEnd"> - Fim: {{ recordEnd }}</div>
+  <div class="row mt-4">
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <th class="20%">Registro</th>
+            <th width="30%">Inicio</th>
+            <th width="30%">Fim</th>
+            <th width="20%">Total</th>
+          </thead>
+          <tbody *ngIf="recordTitle && recordInit">
+            <td>
+                {{ recordTitle }}
+            </td>
+            <td >
+                {{ recordInit }}
+            </td>
+            <td >
+            <span *ngIf="recordEnd">{{ recordEnd }}</span>
+            
+            </td>
+            <td>
+                <span *ngIf="recordEnd">{{ recordTotal }}</span>
+            </td>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
 </div>
