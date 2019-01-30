@@ -8,7 +8,8 @@
           <th width="20%">Registro</th>
           <th width="30%">Inicio</th>
           <th width="30%">Fim</th>
-          <th width="20%">Total</th>
+          <th width="10%">Total</th>
+          <th width="10%">Ações</th>
         </thead>
         <tbody>
           <!-- <tr *ngFor='let record of records | async'> -->
@@ -25,6 +26,9 @@
             </td>
             <td>
               {{ record.duration }}
+            </td>
+            <td>
+              <button (click)="deleteRecord(record.id)" class="btn btn-danger btn-sm">Excluir</button>
             </td>
           </tr>
         </tbody>

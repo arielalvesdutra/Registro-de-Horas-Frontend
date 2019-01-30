@@ -19,6 +19,11 @@ export class TimeRecordListingComponent implements OnInit {
     
     RecordsService.registroAdicionado.subscribe(param => this.getRecords())
   }
+
+  deleteRecord(id: number): void {
+    this.recordService.deleteRecord(id)
+      .subscribe(() => this.getRecords())
+  }
  
   getRecords() {
     this.recordService.getRecords()
