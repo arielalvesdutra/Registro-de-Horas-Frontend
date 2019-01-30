@@ -1,9 +1,36 @@
 <div class="recorder">
   <h3>Listagem de registros</h3>
-  <hr>
+  <!-- <hr> -->
   <div class="row mt-4">
     <div class="col">
-      <p>Json será exibido aqui...:</p>
+      <table class="table table-responsive">
+        <thead>
+          <th width="20%">Registro</th>
+          <th width="30%">Inicio</th>
+          <th width="30%">Fim</th>
+          <th width="20%">Total</th>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor='let record of records | async'> -->
+          <tr *ngFor='let record of records'>
+            <td>
+              {{ record.title }}
+            </td>
+            <td>
+              {{ record.initDate }}
+            </td>
+            <td>
+              {{ record.endDate }}
+
+            </td>
+            <td>
+              {{ record.duration }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <div>
+  </div>
   </div>
 </div>
