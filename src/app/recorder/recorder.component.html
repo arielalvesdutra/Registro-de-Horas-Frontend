@@ -1,12 +1,10 @@
 <div class="recorder">
-
   <h3>Insira um novo registro</h3>
   <hr>
   <div class="form-row mt-4">
     <div class="col">
       <div class="form-group">
-        <input #recordName="ngModel" [(ngModel)]="recordTitle" 
-          [disabled]="recordStarted === true" type="text" class="form-control"
+        <input #recordName="ngModel" [(ngModel)]="recordTitle" [disabled]="recordStarted === true" type="text" class="form-control"
           placeholder="Digite o título do seu registro." required>
       </div>
     </div>
@@ -18,30 +16,25 @@
     </div>
   </div>
   <div class="row mt-4">
-      <div class="col-12">
-        <table class="table">
-          <thead>
-            <th class="20%">Registro</th>
-            <th width="30%">Inicio</th>
-            <th width="30%">Fim</th>
-            <th width="20%">Total</th>
-          </thead>
-          <tbody *ngIf="recordTitle && recordInit">
-            <td>
-                {{ recordTitle }}
-            </td>
-            <td >
-                {{ recordInit }}
-            </td>
-            <td >
+    <div class="col-12">
+      <table class="table table-responsive-sm">
+        <thead>
+          <th width="40%">Registro</th>
+          <th width="30%">Inicio</th>
+          <th width="30%">Fim</th>
+        </thead>
+        <tbody *ngIf="recordTitle && recordInit">
+          <td>
+            {{ recordTitle }}
+          </td>
+          <td>
+            {{ recordInit }}
+          </td>
+          <td>
             <span *ngIf="recordEnd">{{ recordEnd }}</span>
-            
-            </td>
-            <td>
-                <span *ngIf="recordEnd">{{ recordTotal }}</span>
-            </td>
-          </tbody>
-        </table>
-      </div>
+          </td>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
