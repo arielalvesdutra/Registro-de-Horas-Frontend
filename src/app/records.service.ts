@@ -39,8 +39,11 @@ export class RecordsService {
   }
   
   addRecord(timeRecord: TimeRecord) {
-    console.log('addRecord...')
     return this.http.post<TimeRecord>(this.backendApi + 'addRecord', timeRecord, httpOptions)
+  }
+
+  deleteRecord(id: number) {
+    return this.http.delete(this.backendApi + 'deleteRecord/' + id)
   }
 
   getRecords(): Observable<TimeRecord[]> {
