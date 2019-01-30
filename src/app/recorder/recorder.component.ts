@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common'
 
-import * as moment from 'moment'
+import { RecordsService } from '../records.service'
+import { TimeRecord } from '../time-record.model'
 
 @Component({
   selector: 'app-recorder',
@@ -10,23 +11,29 @@ import * as moment from 'moment'
 })
 export class RecorderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private recordService: RecordsService) { }
 
   recordStarted: boolean = false
-  recordTitle : string
+  recordTitle: string
   recordInit: string
   recordEnd: string
-  
+
+  cleanRecordCache(): void {
+    this.recordTitle = ''
+    this.recordInit = ''
+    this.recordEnd = ''
+  }
+
   ngOnInit() {
   }
 
   startTimer(recordName: string) {
-
-    if (!recordName)  {
+    if (!recordName) {
       console.log('não tem texto...')
       return false
     }
 
+    this.cleanRecordCache()
     this.recordStarted = true
     this.recordTitle = recordName
     this.recordInit = formatDate(new Date(), 'yyyy/MM/dd HH:mm:ss', 'en')
@@ -37,5 +44,9 @@ export class RecorderComponent implements OnInit {
     this.recordStarted = false
     this.recordEnd = formatDate(new Date(), 'yyyy/MM/dd HH:mm:ss', 'en')
     console.log(`Parando o temporizador...`)
+
+    this.recordService.addRecord(
+      new TimeRecord(null, this.recordTitle, this.recordInit, this.recordEnd)
+    ).subscribe(() => RecordsService.registroAdicionado.emit())   
   }
 }
