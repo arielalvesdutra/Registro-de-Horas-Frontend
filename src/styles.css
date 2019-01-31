@@ -16,6 +16,11 @@ body {
     margin-right: 10px;
 }
 
+.recorder table button {
+    margin-right: 4px;
+    margin-top: 3px;
+}
+
 .time-recorder {
     margin-top: 50px;
     margin-bottom: 20px;
