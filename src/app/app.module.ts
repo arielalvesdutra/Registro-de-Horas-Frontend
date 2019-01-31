@@ -9,6 +9,13 @@ import { TimeRecorderComponent } from './time-recorder/time-recorder.component';
 import { RecorderComponent } from './recorder/recorder.component';
 import { TimeRecordListingComponent } from './time-record-listing/time-record-listing.component';
 
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,9 +26,16 @@ import { TimeRecordListingComponent } from './time-record-listing/time-record-li
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  constructor() {
+    library.add(faEdit, faTrash)
+  }
+
+}
