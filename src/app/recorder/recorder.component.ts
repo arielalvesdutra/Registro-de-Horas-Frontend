@@ -29,7 +29,6 @@ export class RecorderComponent implements OnInit {
 
   startTimer(recordName: string) {
     if (!recordName) {
-      console.log('não tem texto...')
       return false
     }
 
@@ -37,13 +36,11 @@ export class RecorderComponent implements OnInit {
     this.recordStarted = true
     this.recordTitle = recordName
     this.recordInit = formatDate(new Date(), 'yyyy/MM/dd HH:mm:ss', 'en')
-    console.log(`Iniciando o temporizador...`)
   }
 
   stopTimer() {
     this.recordStarted = false
     this.recordEnd = formatDate(new Date(), 'yyyy/MM/dd HH:mm:ss', 'en')
-    console.log(`Parando o temporizador...`)
 
     this.recordService.addRecord(
       new TimeRecord(null, this.recordTitle, this.recordInit, this.recordEnd)
