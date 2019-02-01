@@ -79,14 +79,14 @@ export class TimeRecordListingComponent implements OnInit {
       this.recordInitDateToUpdate,
       this.recordEndDateToUpdate
     ))
-      .subscribe(() => this.getRecords())
+      .subscribe(() => this.getRecordsByFilters())
 
     this.cleanRecordToUpdateValues()
   }
 
   deleteRecord(id: number): void {
     this.recordService.deleteRecord(id)
-      .subscribe(() => this.getRecords())
+      .subscribe(() => this.getRecordsByFilters())
   }
 
   getRecords(filtersUrl: string = '') {
