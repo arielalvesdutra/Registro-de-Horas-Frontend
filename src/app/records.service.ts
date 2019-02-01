@@ -41,12 +41,19 @@ export class RecordsService {
   addRecord(timeRecord: TimeRecord) {
     return this.http.post<TimeRecord>(this.backendApi + 'addRecord', timeRecord, httpOptions)
   }
-
+  
   deleteRecord(id: number) {
     return this.http.delete(this.backendApi + 'deleteRecord/' + id)
   }
-
-  getRecords(): Observable<TimeRecord[]> {
-    return this.http.get<TimeRecord[]>(this.backendApi + 'getRecords')
+  
+  getRecords(filtersUrl: string = ''): Observable<TimeRecord[]> {
+    let url = filtersUrl 
+      ? this.backendApi + 'getRecords/'  + filtersUrl
+      : this.backendApi + 'getRecords'
+    return this.http.get<TimeRecord[]>(url)
+  }
+  
+  updateRecord(timeRecord: TimeRecord) {   
+    return this.http.put<TimeRecord>(this.backendApi + 'updateRecord/' + timeRecord.id, timeRecord, httpOptions)
   }
 }
