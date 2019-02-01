@@ -1,5 +1,46 @@
 <div class="recorder">
   <h3>Listagem de registros</h3>
+  <hr>
+  <div class="form-row mt-4 record-filter">
+    <div class="col">
+      <h4 class="btn-show-filter">
+        <button (click)="showFilterToggle()" class="btn">
+          <fa-icon *ngIf="!showFilters" icon="plus-circle"></fa-icon>
+          <fa-icon *ngIf="showFilters" icon="minus-circle"></fa-icon>
+        </button>
+        Filtrar
+      </h4>
+
+      <div *ngIf="showFilters">
+        <div class="form-row">
+          <div class="col-12 col-md-6">
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" [(ngModel)]="titleFilter" class="form-control mb-2" placeholder="Digite o título do registro.">
+              </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-md-6">
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="date" [(ngModel)]="dateFilter" class="form-control  mb-2" placeholder="Digite o título.">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mb-3">
+          <div class="col search">
+            <button (click)="getRecordsByFilters()" class="btn">Buscar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="row mt-4">
     <div class="col">
       <table class="table table-responsive">
@@ -7,38 +48,62 @@
           <th width="20%">Registro</th>
           <th width="27%">Inicio</th>
           <th width="27%">Fim</th>
-          <th width="10%">Total</th>
+          <th width="10%">Duração</th>
           <th width="16%">Ações</th>
         </thead>
         <tbody>
-          <!-- <tr *ngFor='let record of records | async'> -->
           <tr *ngFor='let record of records'>
             <td>
-              {{ record.title }}
+              <span *ngIf="record.id !== recordEditId">
+                {{ record.title }}
+              </span>
+              <span *ngIf="record.id === recordEditId">
+                <input type="text" [(ngModel)]="recordTitleToUpdate" value="{{ record.title }}" class="form-control">
+              </span>
             </td>
             <td>
-              {{ record.initDate }}
-            </td>
-            <td>
-              {{ record.endDate }}
+              <span *ngIf="record.id !== recordEditId">
+                {{ record.initDate }}
+              </span>
+              <span *ngIf="record.id === recordEditId">
+                <input type="text" [(ngModel)]="recordInitDateToUpdate" value="{{ record.initDate }}" class="form-control">
+              </span>
 
+            </td>
+            <td>
+              <span *ngIf="record.id !== recordEditId">
+                {{ record.endDate }}
+              </span>
+              <span *ngIf="record.id === recordEditId">
+                <input type="text" [(ngModel)]="recordEndDateToUpdate" value="{{ record.endDate }}" class="form-control">
+              </span>
             </td>
             <td>
               {{ record.duration }}
             </td>
             <td>
-              <button (click)="editRecord(record.id)" class="btn btn-warning btn-sm">
+              <span *ngIf="record.id === recordEditId">
+                <button (click)="confirmUpdate(record)" class="btn btn-success btn-sm " title="Confirmar">
+                  <fa-icon icon="check-circle"></fa-icon>
+                </button>
+                <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
+                  <fa-icon icon="ban"></fa-icon>
+                </button>
+              </span>
+              <span *ngIf="record.id !== recordEditId">
+                <button (click)="updateRecord(record)" class="btn btn-warning btn-sm" title="Editar">
                   <fa-icon icon="edit"></fa-icon>
-              </button>
-              <button (click)="deleteRecord(record.id)" class="btn btn-danger btn-sm ">
-                <fa-icon icon="trash"></fa-icon>
-              </button>
+                </button>
+                <button (click)="deleteRecord(record.id)" class="btn btn-danger btn-sm " title="Excluir">
+                  <fa-icon icon="trash"></fa-icon>
+                </button>
+              </span>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div>
-  </div>
+    </div>
   </div>
 </div>
