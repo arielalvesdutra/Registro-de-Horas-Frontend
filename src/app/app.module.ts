@@ -12,7 +12,7 @@ import { TimeRecordListingComponent } from './time-record-listing/time-record-li
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faTrash, faEdit, faCheckCircle, faBan, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -35,7 +35,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 export class AppModule { 
 
   constructor() {
-    library.add(faEdit, faTrash)
+    library.add(faEdit, faTrash, faCheckCircle, faBan, faPlusCircle, faMinusCircle)
   }
 
 }
