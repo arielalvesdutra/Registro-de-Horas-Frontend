@@ -29,3 +29,41 @@ body {
     padding-bottom: 10px;
 }
 
+.record-filter {
+    background-color: #888;
+    border-radius: 4px;
+    padding-top: 7px;
+    color: white;
+}
+
+.btn-show-filter button {
+    margin-right:0;
+    color: white;
+}
+
+.btn-show-filter button:hover {
+    color: white;
+}
+
+.btn-show-filter button:focus {
+    box-shadow: none;
+    color: white;
+    outline: 0;
+}
+
+.search button {
+    background-color: white;
+    color: gray;
+    opacity: 0.9;
+    margin-left: 10px;
+}
+
+.search button:hover {
+    background-color: white;
+    color: gray;
+    opacity: 1;
+}
+
+.search button:focus {
+    color: gray;
+}
