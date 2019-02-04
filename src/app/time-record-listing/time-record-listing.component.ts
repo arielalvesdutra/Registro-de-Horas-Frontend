@@ -12,6 +12,12 @@ import { ifError } from 'assert';
 })
 export class TimeRecordListingComponent implements OnInit {
 
+  currentPage: number = 1
+  numberOfPages: number
+  pageItems: TimeRecord[]
+  pageItensLimit: number = 5
+  pages:number[]
+
   dateFilter: string
   titleFilter: string
 
@@ -61,8 +67,16 @@ export class TimeRecordListingComponent implements OnInit {
     return filterUrl
   }
 
+  private calculateNumberOfPages(): number {
+    return Math.ceil(this.records.length / this.pageItensLimit)
+  }
+
   cancelEdit() {
     this.recordEditId = null
+  }
+
+  changePage(page: number): void {
+    this.pageItems = this.getPageItems(page)
   }
 
   cleanRecordToUpdateValues() {
@@ -89,9 +103,37 @@ export class TimeRecordListingComponent implements OnInit {
       .subscribe(() => this.getRecordsByFilters())
   }
 
+  private getPages(): number[] {
+    let pages:number[] = []
+
+    for (let index = 1; index <= this.numberOfPages; index++ ) {
+      pages.push(index)
+    } 
+
+    return pages
+  }
+
+  private getPageItems(page:number = null): TimeRecord[] {
+
+    if (page) {
+      this.currentPage = page
+    }
+
+    let initItem:number  = (this.pageItensLimit * this.currentPage) - 1 - (this.pageItensLimit-1)
+    let finalItem:number = (this.pageItensLimit * this.currentPage) 
+    
+
+    return this.records.slice(initItem,finalItem)
+  }
+
   getRecords(filtersUrl: string = '') {
     this.recordService.getRecords(filtersUrl)
-      .subscribe(data => this.records = data)
+      .subscribe(data => {
+        this.records = data
+        this.numberOfPages = this.calculateNumberOfPages()
+        this.pages = this.getPages()
+        this.pageItems = this.getPageItems()
+      })
   }
 
   getRecordsByFilters() {
