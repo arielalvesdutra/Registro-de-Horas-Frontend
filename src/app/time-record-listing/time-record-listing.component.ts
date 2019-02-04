@@ -108,7 +108,7 @@ export class TimeRecordListingComponent implements OnInit {
 
     for (let index = 1; index <= this.numberOfPages; index++ ) {
       pages.push(index)
-    } 
+    }
 
     return pages
   }
@@ -122,7 +122,6 @@ export class TimeRecordListingComponent implements OnInit {
     let initItem:number  = (this.pageItensLimit * this.currentPage) - 1 - (this.pageItensLimit-1)
     let finalItem:number = (this.pageItensLimit * this.currentPage) 
     
-
     return this.records.slice(initItem,finalItem)
   }
 
