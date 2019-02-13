@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class RecordsService {
 
-  backendApi = 'http://192.168.11.100:8000/'
+  backendApi = 'http://localhost:8000/'
   
   static registroAdicionado = new EventEmitter<string>()
 
