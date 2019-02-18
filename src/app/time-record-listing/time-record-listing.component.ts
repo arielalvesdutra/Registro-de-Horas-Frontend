@@ -155,9 +155,10 @@ export class TimeRecordListingComponent implements OnInit {
   }
 
   updateRecord(timeRecord: TimeRecord) {
+
     this.recordEditId = timeRecord.id
     this.recordTitleToUpdate = timeRecord.title
-    this.recordInitDateToUpdate = timeRecord.initDate
-    this.recordEndDateToUpdate = timeRecord.endDate
+    this.recordInitDateToUpdate = timeRecord.initDateTime
+    this.recordEndDateToUpdate = timeRecord.endDateTime
   }
 }
