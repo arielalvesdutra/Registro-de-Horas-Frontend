@@ -2,8 +2,8 @@ class TimeRecord {
     constructor(
         public id: number = null,
         public title: string,
-        public initDate: string,
-        public endDate: string,
+        public initDateTime: string,
+        public endDateTime: string,
         public duration: string = ''
         ) {}
 }
