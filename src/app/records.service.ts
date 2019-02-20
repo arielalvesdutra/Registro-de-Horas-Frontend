@@ -54,6 +54,6 @@ export class RecordsService {
   }
   
   updateRecord(timeRecord: TimeRecord) {   
-    return this.http.put<TimeRecord>(this.backendApi + 'updateRecord/' + timeRecord.id, timeRecord, httpOptions)
+    return this.http.put<TimeRecord>(this.backendApi + 'updateRecord', timeRecord, httpOptions)
   }
 }
