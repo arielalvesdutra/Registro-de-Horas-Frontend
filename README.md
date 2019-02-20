@@ -11,7 +11,7 @@ Esse é o repositorio do projeto "Registro de Horas - Frontend".
 
 A ideia é praticar programação com o Angular 7.
 
-Não é intenção desse projeto aplicar as melhores práticas do Angular, até porque o objeto do mesmo é o aprendizado.
+Não é intenção desse projeto aplicar as melhores práticas do Angular, até porque o objetivo do mesmo é o aprendizado.
 
 Algumas `issues` serão criadas para aplicar refatorações e correções no projeto.
 
