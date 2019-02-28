@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 
 import { TimeRecord } from './time-record.model'
+import { formatDate } from '@angular/common';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -39,7 +40,14 @@ export class RecordsService {
   }
   
   addRecord(timeRecord: TimeRecord) {
-    return this.http.post<TimeRecord>(this.backendApi + 'addRecord', timeRecord, httpOptions)
+
+    let postObject = {
+      "title" : timeRecord.title,
+      "initDateTime" : formatDate(timeRecord.initDateTime,  'y-MM-dd HH:mm:ssZ', 'en' ),
+      "endDateTime" : formatDate(timeRecord.endDateTime,  'y-MM-dd HH:mm:ssZ', 'en' )
+    }
+
+    return this.http.post<TimeRecord>(this.backendApi + 'addRecord', postObject, httpOptions)
   }
   
   deleteRecord(id: number) {
@@ -50,10 +58,19 @@ export class RecordsService {
     let url = filtersUrl 
       ? this.backendApi + 'getRecords/'  + filtersUrl
       : this.backendApi + 'getRecords'
+
     return this.http.get<TimeRecord[]>(url)
   }
   
   updateRecord(timeRecord: TimeRecord) {   
-    return this.http.put<TimeRecord>(this.backendApi + 'updateRecord', timeRecord, httpOptions)
+
+    let putObject = {
+      "id" : timeRecord.id,
+      "title" : timeRecord.title,
+      "initDateTime" : formatDate(timeRecord.initDateTime,  'y-MM-dd HH:mm:ssZ', 'en' ),
+      "endDateTime" : formatDate(timeRecord.endDateTime,  'y-MM-dd HH:mm:ssZ', 'en' )
+    }
+
+    return this.http.put<TimeRecord>(this.backendApi + 'updateRecord', putObject, httpOptions)
   }
 }
