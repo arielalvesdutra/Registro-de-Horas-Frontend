@@ -25,8 +25,8 @@ export class TimeRecordListingComponent implements OnInit {
 
   recordEditId: number
   recordTitleToUpdate: string
-  recordInitDateToUpdate: string
-  recordEndDateToUpdate: string
+  recordInitDateToUpdate: Date
+  recordEndDateToUpdate: Date
 
   showFilters: boolean = false
 
