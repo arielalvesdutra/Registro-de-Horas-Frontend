@@ -28,10 +28,10 @@
             {{ recordTitle }}
           </td>
           <td>
-            {{ recordInit }}
+            {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
           </td>
           <td>
-            <span *ngIf="recordEnd">{{ recordEnd }}</span>
+            <span *ngIf="recordEnd">{{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}</span>
           </td>
         </tbody>
       </table>

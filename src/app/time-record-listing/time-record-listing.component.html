@@ -63,7 +63,7 @@
             </td>
             <td>
               <span *ngIf="record.id !== recordEditId">
-                {{ record.initDateTime }}
+                {{ record.initDateTime | date: 'y/MM/dd HH:mm:ss' }}
               </span>
               <span *ngIf="record.id === recordEditId">
                 <input type="text" [(ngModel)]="recordInitDateToUpdate" value="{{ record.initDateTime }}" class="form-control">
@@ -72,7 +72,7 @@
             </td>
             <td>
               <span *ngIf="record.id !== recordEditId">
-                {{ record.endDateTime }}
+                {{ record.endDateTime | date: 'y/MM/dd HH:mm:ss' }}
               </span>
               <span *ngIf="record.id === recordEditId">
                 <input type="text" [(ngModel)]="recordEndDateToUpdate" value="{{ record.endDateTime }}" class="form-control">

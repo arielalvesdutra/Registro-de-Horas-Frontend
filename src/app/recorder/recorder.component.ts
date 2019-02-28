@@ -15,13 +15,13 @@ export class RecorderComponent implements OnInit {
 
   recordStarted: boolean = false
   recordTitle: string
-  recordInit: string
-  recordEnd: string
+  recordInit: Date
+  recordEnd: Date
 
   cleanRecordCache(): void {
     this.recordTitle = ''
-    this.recordInit = ''
-    this.recordEnd = ''
+    this.recordInit = null
+    this.recordEnd = null
   }
 
   ngOnInit() {
@@ -35,12 +35,12 @@ export class RecorderComponent implements OnInit {
     this.cleanRecordCache()
     this.recordStarted = true
     this.recordTitle = recordName
-    this.recordInit = formatDate(new Date(), 'yyyy/MM/dd HH:mm:ss', 'en')
+    this.recordInit = new Date()
   }
 
   stopTimer() {
     this.recordStarted = false
-    this.recordEnd = formatDate(new Date(), 'yyyy/MM/dd HH:mm:ss', 'en')
+    this.recordEnd = new Date()
 
     this.recordService.addRecord(
       new TimeRecord(null, this.recordTitle, this.recordInit, this.recordEnd)
