@@ -5,11 +5,11 @@ import { RecordsService } from '../records.service'
 import { TimeRecord } from '../time-record.model'
 
 @Component({
-  selector: 'app-recorder',
-  templateUrl: './recorder.component.html',
-  styleUrls: ['./recorder.component.css']
+  selector: 'app-insert-records',
+  templateUrl: './insert-records.component.html',
+  styleUrls: ['./insert-records.component.css']
 })
-export class RecorderComponent implements OnInit {
+export class InsertRecordsComponent implements OnInit {
 
   constructor(private recordService: RecordsService) { }
 

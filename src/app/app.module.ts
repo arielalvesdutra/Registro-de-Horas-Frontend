@@ -6,7 +6,7 @@ import { FormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { TimeRecorderComponent } from './time-recorder/time-recorder.component';
-import { RecorderComponent } from './recorder/recorder.component';
+import { InsertRecordsComponent } from './insert-records/insert-records.component';
 import { TimeRecordListingComponent } from './time-record-listing/time-record-listing.component';
 
 
@@ -20,7 +20,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
   declarations: [
     AppComponent,
     TimeRecorderComponent,
-    RecorderComponent,
+    InsertRecordsComponent,
     TimeRecordListingComponent
   ],
   imports: [
