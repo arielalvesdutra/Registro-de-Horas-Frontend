@@ -1,10 +1,11 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, throwError } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 
 import { TimeRecord } from './time-record.model'
-import { formatDate } from '@angular/common';
+import { BACKEND } from './app.backend'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOptions = {
 })
 export class RecordsService {
 
-  backendApi = 'http://localhost:8000/'
+  backendApi = BACKEND
   
   static registroAdicionado = new EventEmitter<string>()
 
