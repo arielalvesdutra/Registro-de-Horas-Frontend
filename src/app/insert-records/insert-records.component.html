@@ -1,40 +1,184 @@
 <div class="recorder">
   <h3>Inserir registros</h3>
   <hr>
-  <div class="form-row mt-4">
-    <div class="col">
-      <div class="form-group">
-        <input #recordName="ngModel" [(ngModel)]="recordTitle" [disabled]="recordStarted === true" type="text" class="form-control"
-          placeholder="Digite o título do seu registro." required>
+  <form [formGroup]="insertRecordForm">
+
+    <div class="form-row mt-4">
+      <div class="col">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Digite o título do seu registro."
+            formControlName="recordTitle" maxlength="50">
+        </div>
       </div>
     </div>
+    <div class="form-row mt-1">
+      <div class="col">
+        <div *ngIf="recordStarted === false">
+          <button class="btn btn-success col" (click)="startTimer()"
+            [disabled]="!insertRecordForm.valid">Iniciar</button>
+        </div>
+        <div *ngIf="recordStarted === true">
+          <button class="btn btn-danger col" (click)="stopTimer()">Parar</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="form-row mt-3 border">
+    <div class="col-4">Título do registro</div>
+    <div class="col-4">Inicio</div>
+    <div class="col-4">Final</div>
   </div>
-  <div class="form-row">
-    <div class="col-12">
-      <button [disabled]="recordStarted === true || recordName.invalid" (click)="startTimer(recordName.value)" class="btn btn-success col-4 col-md-3">Iniciar</button>
-      <button [disabled]="recordStarted === false" (click)="stopTimer()" class="btn btn-danger col-4 col-md-3">Encerrar</button>
+  <div class="text wrap form-row border ">
+    <div class="col-4  overflow-auto">
+      {{ recordTitle }}
+    </div>
+    <div class="col-4 ">
+      <strong>
+        {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
+      </strong>
+    </div>
+    <div class="col-4 ">
+      {{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col-12">
-      <table class="table table-responsive-sm">
-        <thead>
-          <th width="40%">Registro</th>
-          <th width="30%">Inicio</th>
-          <th width="30%">Fim</th>
-        </thead>
-        <tbody *ngIf="recordTitle && recordInit">
-          <td>
-            {{ recordTitle }}
-          </td>
-          <td>
-            {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
-          </td>
-          <td>
-            <span *ngIf="recordEnd">{{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}</span>
-          </td>
-        </tbody>
-      </table>
+
+  <div class="form-row mt-3 border">
+    <div class="col-6">
+      Título do registro
+    </div>
+    <div class="col-3">
+      Inicio
+    </div>
+    <div class="col-3">
+      Final
+    </div>
+  </div>
+  <div class="text-wrap form-row border ">
+    <div class="col-6 text-truncate ">
+      {{ recordTitle }}
+    </div>
+    <div class="col-3 ">
+      <strong>
+        {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
+      </strong>
+    </div>
+    <div class="col-3 ">
+      {{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}
+    </div>
+  </div>
+
+  <div class="form-row mt-4">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped table-responsive-sm border">
+          <thead>
+            <th width="40%">
+              Título do registro
+            </th>
+            <th width="30%">
+              Inicio
+            </th>
+            <th width="30%">
+              Final
+            </th>
+          </thead>
+          <tbody>
+            <tr class="text-truncate">
+              <td width="30%" style="overflow:hidden;">
+                <strong>
+                  {{ recordTitle }}
+                </strong>
+              </td>
+              <td width="35%">
+                <strong>
+                  {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+              <td width="35%">
+                <strong>
+                  {{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped border">
+          <tbody>
+            <tr>
+              <td width="30%">Registro</td>
+              <td>
+                <strong>
+                  {{ recordTitle }}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Inicio</td>
+              <td>
+                <strong>
+                  {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Final</td>
+              <td>
+                <strong>
+                  {{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped border">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>
+                  Registro
+                </strong>
+              </td>
+              <td>
+                <strong>
+                  {{ recordTitle }}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Inicio
+                </strong>
+              </td>
+              <td>
+                <strong>
+                  {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Final
+                </strong>
+              </td>
+              <td>
+                <strong>
+                  {{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
