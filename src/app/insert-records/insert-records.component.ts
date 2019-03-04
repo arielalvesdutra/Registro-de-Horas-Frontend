@@ -1,40 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { formatDate } from '@angular/common'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { RecordsService } from '../records.service'
 import { TimeRecord } from '../time-record.model'
 
 @Component({
-  selector: 'app-recorder',
-  templateUrl: './recorder.component.html',
-  styleUrls: ['./recorder.component.css']
+  selector: 'app-insert-records',
+  templateUrl: './insert-records.component.html',
+  styleUrls: ['./insert-records.component.css']
 })
-export class RecorderComponent implements OnInit {
+export class InsertRecordsComponent implements OnInit {
 
-  constructor(private recordService: RecordsService) { }
-
+  insertRecordForm: FormGroup
+  
   recordStarted: boolean = false
   recordTitle: string
   recordInit: Date
   recordEnd: Date
-
+  
   cleanRecordCache(): void {
     this.recordTitle = ''
     this.recordInit = null
     this.recordEnd = null
   }
-
+  
+  constructor(private recordService: RecordsService, private formBuilder: FormBuilder) { }
+  
   ngOnInit() {
+    this.insertRecordForm = this.formBuilder.group({
+      recordTitle: [ this.recordTitle, [ Validators.required, Validators.maxLength(50) ]]
+    })
   }
 
-  startTimer(recordName: string) {
-    if (!recordName) {
-      return false
-    }
-
-    this.cleanRecordCache()
+  startTimer() {
     this.recordStarted = true
-    this.recordTitle = recordName
+    this.cleanRecordCache()
+    this.recordTitle = this.insertRecordForm.value.recordTitle
     this.recordInit = new Date()
   }
 

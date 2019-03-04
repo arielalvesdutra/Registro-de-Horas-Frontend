@@ -1,0 +1,126 @@
+<div class="recorder">
+  <h3>Gerenciar registros</h3>
+  <hr>
+  <!-- FILTRO -->
+  <div class="form-row mt-4 record-filter">
+    <div class="col">
+      <h4 class="btn-show-filter">
+        <button (click)="showFilterToggle()" class="btn">
+          <fa-icon *ngIf="!showFilters" icon="plus-circle"></fa-icon>
+          <fa-icon *ngIf="showFilters" icon="minus-circle"></fa-icon>
+        </button>
+        Filtrar
+      </h4>
+
+      <div *ngIf="showFilters">
+        <form [formGroup]="recordsFiltersForm" (ngSubmit)="getRecordsByFilters()">
+          <div class="form-row">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="titleFilter"
+                    placeholder="Digite o título do registro a ser filtrado.">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" type="date" formControlName="initDateFilter">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-12">
+              <button class="form-control btn-secondary btn mb-3">Pesquisar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- FIM FILTRO -->
+  <!-- GERENCIAR REGISTROS -->
+  <div class="row mt-4">
+    <div class="col">
+      <table class="table table-responsive table-striped">
+        <thead>
+          <th width="20%">Registro</th>
+          <th width="27%">Inicio</th>
+          <th width="27%">Fim</th>
+          <th width="10%">Duração</th>
+          <th width="16%">Ações</th>
+        </thead>
+        <!-- TEM REGISTROS -->
+        <tbody *ngIf="pageItems">
+          <tr *ngFor='let record of pageItems'>
+            <!-- LISTAR REGISTRO -->
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.title }}
+            </td>
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.initDateTime | date: 'y/MM/dd HH:mm:ss' }}
+            </td>
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.endDateTime | date: 'y/MM/dd HH:mm:ss' }}
+            </td>
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.duration }}
+            </td>
+            <td *ngIf="record.id !== recordEditId">
+              <button (click)="updateRecord(record)" class="btn btn-warning btn-sm" title="Editar">
+                <fa-icon icon="edit"></fa-icon>
+              </button>
+              <button (click)="deleteRecord(record.id)" class="btn btn-danger btn-sm " title="Excluir">
+                <fa-icon icon="trash"></fa-icon>
+              </button>
+            </td>
+            <!-- FIM LISTAR REGISTRO -->
+            <!-- ATUALIZAR REGISTRO -->
+            <td *ngIf="record.id === recordEditId" colspan="5">
+              <form [formGroup]="recordUpdateForm" (ngSubmit)="confirmUpdate(record)">
+                <span class="input-group">
+                  <input class="form-control" value="{{ record.title }}" formControlName="recordTitle">
+                  <input class="form-control ml-2" value="{{ record.initDateTime }}"
+                    formControlName="recordInitDateTime">
+                  <input class="form-control ml-2" value="{{ record.endDateTime }}" formControlName="recordEndDateTime">
+                  <button class="btn btn-success btn-sm ml-2" title="Confirmar" [disabled]="!recordUpdateForm.valid">
+                    <fa-icon icon="check-circle"></fa-icon>
+                  </button>
+                  <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
+                    <fa-icon icon="ban"></fa-icon>
+                  </button>
+                </span>
+              </form>
+            </td>
+            <!-- FIM ATUALIZAR REGISTRO -->
+          </tr>
+        </tbody>
+        <!-- FIM TEM REGISTROS -->
+        <!-- NÃO TEM REGISTROS -->
+        <tbody *ngIf="!hasItems()">
+          <tr>
+            <td colspan="5">
+              Nenhum registro encontrado.
+            </td>
+          </tr>
+        </tbody>
+        <!-- FIM NÃO TEM REGISTROS -->
+      </table>
+    </div>
+  </div>
+  <!-- FIM GERENCIAR REGISTROS -->
+  <!-- PAGINAÇÃO -->
+  <div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)">{{ page }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- FIM PAGINAÇÃO -->
+</div>

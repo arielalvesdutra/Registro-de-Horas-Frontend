@@ -1,42 +1,39 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
-import { RecordsService } from '../records.service'
-import { TimeRecord } from '../time-record.model'
 import { filter } from 'rxjs/operators';
 import { ifError } from 'assert';
 
-@Component({
-  selector: 'app-time-record-listing',
-  templateUrl: './time-record-listing.component.html',
-  styleUrls: ['./time-record-listing.component.css']
-})
-export class TimeRecordListingComponent implements OnInit {
+import { RecordsService } from '../records.service'
+import { TimeRecord } from '../time-record.model'
 
+@Component({
+  selector: 'app-manage-records',
+  templateUrl: './manage-records.component.html',
+  styleUrls: ['./manage-records.component.css']
+})
+export class ManageRecordsComponent implements OnInit {
+
+  // todo: pode ser um subcomponente
   currentPage: number = 1
   numberOfPages: number
   pageItems: TimeRecord[]
   pageItensLimit: number = 5
   pages:number[]
 
-  dateFilter: string
-  titleFilter: string
+  // todo: pode ser um subcomponente
+  showFilters: boolean = false
 
   records: TimeRecord[]
 
+  recordsFiltersForm: FormGroup
+
+  recordUpdateForm: FormGroup
+
+  // todo: pode virar um objeto
   recordEditId: number
-  recordTitleToUpdate: string
-  recordInitDateToUpdate: Date
-  recordEndDateToUpdate: Date
 
-  showFilters: boolean = false
-
-  constructor(private recordService: RecordsService) { }
-
-  ngOnInit() {
-    this.getRecords()
-
-    RecordsService.registroAdicionado.subscribe(param => this.getRecordsByFilters())
-  }
+  constructor(private recordService: RecordsService, private formBuilder: FormBuilder) { }
 
   private arrayIsEmpty(array: any[]): boolean {
     for (let index in array) {
@@ -72,6 +69,7 @@ export class TimeRecordListingComponent implements OnInit {
   }
 
   cancelEdit() {
+    event.preventDefault()
     this.recordEditId = null
   }
 
@@ -81,17 +79,19 @@ export class TimeRecordListingComponent implements OnInit {
 
   cleanRecordToUpdateValues() {
     this.recordEditId = null
-    this.recordTitleToUpdate = null
-    this.recordInitDateToUpdate = null
-    this.recordEndDateToUpdate = null
+    this.recordUpdateForm.patchValue({ 
+      recordTitle: '',
+      recordInitDateTime: null,
+      recordEndDateTime: null
+    })
   }
 
   confirmUpdate(timeRecord: TimeRecord) {
     this.recordService.updateRecord(new TimeRecord(
       this.recordEditId,
-      this.recordTitleToUpdate,
-      this.recordInitDateToUpdate,
-      this.recordEndDateToUpdate
+      this.recordUpdateForm.value.recordTitle,
+      this.recordUpdateForm.value.recordInitDateTime,
+      this.recordUpdateForm.value.recordEndDateTime
     ))
       .subscribe(() => this.getRecordsByFilters())
 
@@ -130,19 +130,21 @@ export class TimeRecordListingComponent implements OnInit {
       .subscribe(data => {
         this.records = data
         this.numberOfPages = this.calculateNumberOfPages()
+        this.currentPage = 1
         this.pages = this.getPages()
         this.pageItems = this.getPageItems()
       })
   }
 
   getRecordsByFilters() {
+
     let filterOptions = []
 
-    if (this.dateFilter) {
-      filterOptions['initDate'] = this.dateFilter
+    if (this.recordsFiltersForm.value.initDateFilter) {
+      filterOptions['initDate'] = this.recordsFiltersForm.value.initDateFilter
     }
-    if (this.titleFilter) {
-      filterOptions['title'] = this.titleFilter
+    if (this.recordsFiltersForm.value.titleFilter) {
+      filterOptions['title'] = this.recordsFiltersForm.value.titleFilter
     }
 
     let filtersUrl = this.buildFilterUrl(filterOptions)
@@ -150,15 +152,41 @@ export class TimeRecordListingComponent implements OnInit {
     this.getRecords(filtersUrl)
   }
 
+  hasItems(): boolean {
+    if (this.numberOfPages > 0) {
+      return true
+    }
+    
+    return false
+  }
+
+  ngOnInit() {
+    this.getRecords()
+
+    this.recordsFiltersForm = this.formBuilder.group({
+      titleFilter: [''],
+      initDateFilter: [ ]
+    })
+
+    this.recordUpdateForm = this.formBuilder.group({
+      recordTitle: [ '', Validators.required ],
+      recordInitDateTime: [ Date, Validators.required ],
+      recordEndDateTime: [ Date, Validators.required ]
+    })
+
+    RecordsService.registroAdicionado.subscribe(param => this.getRecordsByFilters())
+  }
+
   showFilterToggle() {
     this.showFilters = !this.showFilters
   }
 
   updateRecord(timeRecord: TimeRecord) {
-
-    this.recordEditId = timeRecord.id
-    this.recordTitleToUpdate = timeRecord.title
-    this.recordInitDateToUpdate = timeRecord.initDateTime
-    this.recordEndDateToUpdate = timeRecord.endDateTime
+    this.recordEditId = timeRecord.id    
+    this.recordUpdateForm.patchValue({ 
+      recordTitle: timeRecord.title,
+      recordInitDateTime: timeRecord.initDateTime,
+      recordEndDateTime: timeRecord.endDateTime
+    })    
   }
 }

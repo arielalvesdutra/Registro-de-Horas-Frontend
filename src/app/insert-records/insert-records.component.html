@@ -1,0 +1,76 @@
+<div class="recorder">
+  <h3>Inserir registros</h3>
+  <hr>
+  <form [formGroup]="insertRecordForm">
+
+    <div class="form-row mt-4">
+      <div class="col">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Digite o título do seu registro."
+            formControlName="recordTitle" maxlength="50">
+        </div>
+      </div>
+    </div>
+    <div class="form-row mt-1">
+      <div class="col">
+        <div *ngIf="recordStarted === false">
+          <button class="btn btn-success col" (click)="startTimer()"
+            [disabled]="!insertRecordForm.valid">Iniciar</button>
+        </div>
+        <div *ngIf="recordStarted === true">
+          <button class="btn btn-danger col" (click)="stopTimer()">Parar</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div *ngIf="recordInit" class="form-row mt-4">
+    <div class="col">
+
+      <div class="table-responsive">
+        <table class="table table-striped border">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>
+                  Registro
+                </strong>
+              </td>
+              <td>
+                <strong>
+                  {{ recordTitle }}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Inicio
+                </strong>
+              </td>
+              <td>
+                <strong>
+                  {{ recordInit | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Final
+                </strong>
+              </td>
+              <td>
+                <strong>
+                  {{ recordEnd | date: 'y/MM/dd HH:mm:ss' }}
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
