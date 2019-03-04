@@ -22,13 +22,11 @@ export class ManageRecordsComponent implements OnInit {
   pages:number[]
 
   // todo: pode ser um subcomponente
-  dateFilter: string
-  titleFilter: string
   showFilters: boolean = false
 
   records: TimeRecord[]
 
-  filterRecordsForm: FormGroup
+  recordsFiltersForm: FormGroup
 
   recordUpdateForm: FormGroup
 
@@ -138,13 +136,14 @@ export class ManageRecordsComponent implements OnInit {
   }
 
   getRecordsByFilters() {
+
     let filterOptions = []
 
-    if (this.dateFilter) {
-      filterOptions['initDate'] = this.dateFilter
+    if (this.recordsFiltersForm.value.initDateFilter) {
+      filterOptions['initDate'] = this.recordsFiltersForm.value.initDateFilter
     }
-    if (this.titleFilter) {
-      filterOptions['title'] = this.titleFilter
+    if (this.recordsFiltersForm.value.titleFilter) {
+      filterOptions['title'] = this.recordsFiltersForm.value.titleFilter
     }
 
     let filtersUrl = this.buildFilterUrl(filterOptions)
@@ -154,6 +153,11 @@ export class ManageRecordsComponent implements OnInit {
 
   ngOnInit() {
     this.getRecords()
+
+    this.recordsFiltersForm = this.formBuilder.group({
+      titleFilter: [''],
+      initDateFilter: [ ]
+    })
 
     this.recordUpdateForm = this.formBuilder.group({
       recordTitle: [ '', Validators.required ],
