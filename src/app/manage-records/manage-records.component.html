@@ -1,6 +1,7 @@
 <div class="recorder">
   <h3>Gerenciar registros</h3>
   <hr>
+  <!-- FILTRO -->
   <div class="form-row mt-4 record-filter">
     <div class="col">
       <h4 class="btn-show-filter">
@@ -17,7 +18,8 @@
 
             <div class="form-group">
               <div class="input-group">
-                <input type="text" [(ngModel)]="titleFilter" class="form-control mb-2" placeholder="Digite o título do registro.">
+                <input type="text" [(ngModel)]="titleFilter" class="form-control mb-2"
+                  placeholder="Digite o título do registro.">
               </div>
             </div>
 
@@ -41,6 +43,7 @@
 
     </div>
   </div>
+  <!-- GERENCIAR REGISTROS -->
   <div class="row mt-4">
     <div class="col">
       <table class="table table-responsive">
@@ -53,52 +56,51 @@
         </thead>
         <tbody>
           <tr *ngFor='let record of pageItems'>
-            <td>
-              <span *ngIf="record.id !== recordEditId">
-                {{ record.title }}
-              </span>
-              <span *ngIf="record.id === recordEditId">
-                <input type="text" [(ngModel)]="recordTitleToUpdate" value="{{ record.title }}" class="form-control">
-              </span>
+            <!-- LISTAR REGISTRO -->
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.title }}
             </td>
-            <td>
-              <span *ngIf="record.id !== recordEditId">
-                {{ record.initDateTime | date: 'y/MM/dd HH:mm:ss' }}
-              </span>
-              <span *ngIf="record.id === recordEditId">
-                <input type="text" [(ngModel)]="recordInitDateToUpdate" value="{{ record.initDateTime }}" class="form-control">
-              </span>
-
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.initDateTime | date: 'y/MM/dd HH:mm:ss' }}
             </td>
-            <td>
-              <span *ngIf="record.id !== recordEditId">
-                {{ record.endDateTime | date: 'y/MM/dd HH:mm:ss' }}
-              </span>
-              <span *ngIf="record.id === recordEditId">
-                <input type="text" [(ngModel)]="recordEndDateToUpdate" value="{{ record.endDateTime }}" class="form-control">
-              </span>
+            <td *ngIf="record.id !== recordEditId">
+              {{ record.endDateTime | date: 'y/MM/dd HH:mm:ss' }}
             </td>
-            <td>
+            <td *ngIf="record.id !== recordEditId">
               {{ record.duration }}
             </td>
-            <td>
-              <span *ngIf="record.id === recordEditId">
-                <button (click)="confirmUpdate(record)" class="btn btn-success btn-sm " title="Confirmar">
-                  <fa-icon icon="check-circle"></fa-icon>
-                </button>
-                <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
-                  <fa-icon icon="ban"></fa-icon>
-                </button>
-              </span>
-              <span *ngIf="record.id !== recordEditId">
-                <button (click)="updateRecord(record)" class="btn btn-warning btn-sm" title="Editar">
-                  <fa-icon icon="edit"></fa-icon>
-                </button>
-                <button (click)="deleteRecord(record.id)" class="btn btn-danger btn-sm " title="Excluir">
-                  <fa-icon icon="trash"></fa-icon>
-                </button>
-              </span>
+            <td *ngIf="record.id !== recordEditId">
+              <button (click)="updateRecord(record)" class="btn btn-warning btn-sm" title="Editar">
+                <fa-icon icon="edit"></fa-icon>
+              </button>
+              <button (click)="deleteRecord(record.id)" class="btn btn-danger btn-sm " title="Excluir">
+                <fa-icon icon="trash"></fa-icon>
+              </button>
             </td>
+            <!-- FIM LISTAR REGISTRO -->
+            <!-- ATUALIZAR REGISTRO -->
+            <td *ngIf="record.id === recordEditId">
+              <input type="text" [(ngModel)]="recordTitleToUpdate" value="{{ record.title }}" class="form-control">
+            </td>
+            <td *ngIf="record.id === recordEditId">
+              <input type="text" [(ngModel)]="recordInitDateToUpdate" value="{{ record.initDateTime }}"
+                class="form-control">
+            </td>
+            <td *ngIf="record.id === recordEditId">
+              <input type="text" [(ngModel)]="recordEndDateToUpdate" value="{{ record.endDateTime }}"
+                class="form-control">
+            </td>
+            <td *ngIf="record.id === recordEditId">
+            </td>
+            <td *ngIf="record.id === recordEditId">
+              <button (click)="confirmUpdate(record)" class="btn btn-success btn-sm " title="Confirmar">
+                <fa-icon icon="check-circle"></fa-icon>
+              </button>
+              <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
+                <fa-icon icon="ban"></fa-icon>
+              </button>
+            </td>
+            <!-- FIM ATUALIZAR REGISTRO -->
           </tr>
         </tbody>
       </table>
@@ -106,6 +108,7 @@
     <div>
     </div>
   </div>
+  <!-- PAGINAÇÃO -->
   <div>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
