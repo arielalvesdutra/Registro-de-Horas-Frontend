@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
-import { TimeRecorderComponent } from './time-recorder/time-recorder.component';
 import { InsertRecordsComponent } from './insert-records/insert-records.component';
 import { ManageRecordsComponent } from './manage-records/manage-records.component';
 
@@ -17,7 +16,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 @NgModule({
   declarations: [
     AppComponent,
-    TimeRecorderComponent,
     InsertRecordsComponent,
     ManageRecordsComponent
   ],

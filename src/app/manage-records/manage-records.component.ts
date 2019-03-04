@@ -116,7 +116,7 @@ export class ManageRecordsComponent implements OnInit {
   private getPageItems(page:number = null): TimeRecord[] {
 
     if (page) {
-      this.currentPage = page
+      this.setCurrentPage(page)
     }
 
     let initItem:number  = (this.pageItensLimit * this.currentPage) - 1 - (this.pageItensLimit-1)
@@ -130,7 +130,7 @@ export class ManageRecordsComponent implements OnInit {
       .subscribe(data => {
         this.records = data
         this.numberOfPages = this.calculateNumberOfPages()
-        this.currentPage = 1
+        this.setCurrentPage()
         this.pages = this.getPages()
         this.pageItems = this.getPageItems()
       })
@@ -156,7 +156,7 @@ export class ManageRecordsComponent implements OnInit {
     if (this.numberOfPages > 0) {
       return true
     }
-    
+
     return false
   }
 
@@ -175,6 +175,20 @@ export class ManageRecordsComponent implements OnInit {
     })
 
     RecordsService.registroAdicionado.subscribe(param => this.getRecordsByFilters())
+  }
+
+  /**
+   * @param page 
+   */
+  private setCurrentPage(page?: number){
+
+    if (page) {
+      this.currentPage = page
+    }
+
+    if (this.currentPage > this.numberOfPages && this.numberOfPages > 0) {
+      this.currentPage = this.numberOfPages
+    }
   }
 
   showFilterToggle() {
