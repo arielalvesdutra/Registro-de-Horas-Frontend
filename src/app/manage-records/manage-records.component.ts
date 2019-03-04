@@ -12,23 +12,25 @@ import { ifError } from 'assert';
 })
 export class ManageRecordsComponent implements OnInit {
 
+  // todo: pode ser um subcomponente
   currentPage: number = 1
   numberOfPages: number
   pageItems: TimeRecord[]
   pageItensLimit: number = 5
   pages:number[]
 
+  // todo: pode ser um subcomponente
   dateFilter: string
   titleFilter: string
+  showFilters: boolean = false
 
   records: TimeRecord[]
 
+  // todo: pode virar um objeto
   recordEditId: number
   recordTitleToUpdate: string
   recordInitDateToUpdate: Date
   recordEndDateToUpdate: Date
-
-  showFilters: boolean = false
 
   constructor(private recordService: RecordsService) { }
 
