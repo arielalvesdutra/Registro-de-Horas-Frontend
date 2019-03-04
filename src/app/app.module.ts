@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { TimeRecorderComponent } from './time-recorder/time-recorder.component';
@@ -23,7 +23,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule
