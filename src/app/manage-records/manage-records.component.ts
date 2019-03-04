@@ -130,6 +130,7 @@ export class ManageRecordsComponent implements OnInit {
       .subscribe(data => {
         this.records = data
         this.numberOfPages = this.calculateNumberOfPages()
+        this.currentPage = 1
         this.pages = this.getPages()
         this.pageItems = this.getPageItems()
       })
@@ -149,6 +150,14 @@ export class ManageRecordsComponent implements OnInit {
     let filtersUrl = this.buildFilterUrl(filterOptions)
 
     this.getRecords(filtersUrl)
+  }
+
+  hasItems(): boolean {
+    if (this.numberOfPages > 0) {
+      return true
+    }
+    
+    return false
   }
 
   ngOnInit() {
