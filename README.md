@@ -23,7 +23,7 @@ O objetivo da aplicação frontend é adicionar, listar, editar e remover "regis
 
 Segue abaixo a tela da aplicação:
 
-![association graph](src/assets/docs/tela.jpg)
+![association graph](src/assets/docs/v0-4-2.jpg)
 
 # 2. Instalação
 
