@@ -28,13 +28,12 @@ export class ManageRecordsComponent implements OnInit {
 
   records: TimeRecord[]
 
-  // update record form
+  filterRecordsForm: FormGroup
 
-  updateRecordForm : FormGroup
+  recordUpdateForm: FormGroup
 
   // todo: pode virar um objeto
   recordEditId: number
-
 
   constructor(private recordService: RecordsService, private formBuilder: FormBuilder) { }
 
@@ -82,7 +81,7 @@ export class ManageRecordsComponent implements OnInit {
 
   cleanRecordToUpdateValues() {
     this.recordEditId = null
-    this.updateRecordForm.patchValue({ 
+    this.recordUpdateForm.patchValue({ 
       recordTitle: '',
       recordInitDateTime: null,
       recordEndDateTime: null
@@ -92,9 +91,9 @@ export class ManageRecordsComponent implements OnInit {
   confirmUpdate(timeRecord: TimeRecord) {
     this.recordService.updateRecord(new TimeRecord(
       this.recordEditId,
-      this.updateRecordForm.value.recordTitle,
-      this.updateRecordForm.value.recordInitDateTime,
-      this.updateRecordForm.value.recordEndDateTime
+      this.recordUpdateForm.value.recordTitle,
+      this.recordUpdateForm.value.recordInitDateTime,
+      this.recordUpdateForm.value.recordEndDateTime
     ))
       .subscribe(() => this.getRecordsByFilters())
 
@@ -156,7 +155,7 @@ export class ManageRecordsComponent implements OnInit {
   ngOnInit() {
     this.getRecords()
 
-    this.updateRecordForm = this.formBuilder.group({
+    this.recordUpdateForm = this.formBuilder.group({
       recordTitle: [ '', Validators.required ],
       recordInitDateTime: [ Date, Validators.required ],
       recordEndDateTime: [ Date, Validators.required ]
@@ -171,7 +170,7 @@ export class ManageRecordsComponent implements OnInit {
 
   updateRecord(timeRecord: TimeRecord) {
     this.recordEditId = timeRecord.id    
-    this.updateRecordForm.patchValue({ 
+    this.recordUpdateForm.patchValue({ 
       recordTitle: timeRecord.title,
       recordInitDateTime: timeRecord.initDateTime,
       recordEndDateTime: timeRecord.endDateTime
