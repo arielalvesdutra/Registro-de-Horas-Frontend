@@ -43,10 +43,11 @@
 
     </div>
   </div>
+  <!-- FIM FILTRO -->
   <!-- GERENCIAR REGISTROS -->
   <div class="row mt-4">
     <div class="col">
-      <table class="table table-responsive">
+      <table class="table table-responsive table-striped">
         <thead>
           <th width="20%">Registro</th>
           <th width="27%">Inicio</th>
@@ -79,35 +80,29 @@
             </td>
             <!-- FIM LISTAR REGISTRO -->
             <!-- ATUALIZAR REGISTRO -->
-            <td *ngIf="record.id === recordEditId">
-              <input type="text" [(ngModel)]="recordTitleToUpdate" value="{{ record.title }}" class="form-control">
-            </td>
-            <td *ngIf="record.id === recordEditId">
-              <input type="text" [(ngModel)]="recordInitDateToUpdate" value="{{ record.initDateTime }}"
-                class="form-control">
-            </td>
-            <td *ngIf="record.id === recordEditId">
-              <input type="text" [(ngModel)]="recordEndDateToUpdate" value="{{ record.endDateTime }}"
-                class="form-control">
-            </td>
-            <td *ngIf="record.id === recordEditId">
-            </td>
-            <td *ngIf="record.id === recordEditId">
-              <button (click)="confirmUpdate(record)" class="btn btn-success btn-sm " title="Confirmar">
-                <fa-icon icon="check-circle"></fa-icon>
-              </button>
-              <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
-                <fa-icon icon="ban"></fa-icon>
-              </button>
+            <td *ngIf="record.id === recordEditId" colspan="5">
+              <form [formGroup]="updateRecordForm" (ngSubmit)="confirmUpdate(record)">
+                <span class="input-group">
+                  <input class="form-control" value="{{ record.title }}" formControlName="recordTitle">
+                  <input class="form-control ml-2" value="{{ record.initDateTime }}"
+                    formControlName="recordInitDateTime">
+                  <input class="form-control ml-2" value="{{ record.endDateTime }}" formControlName="recordEndDateTime">
+                  <button class="btn btn-success btn-sm ml-2" title="Confirmar" [disabled]="!updateRecordForm.valid">
+                    <fa-icon icon="check-circle"></fa-icon>
+                  </button>
+                  <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
+                    <fa-icon icon="ban"></fa-icon>
+                  </button>
+                </span>
+              </form>
             </td>
             <!-- FIM ATUALIZAR REGISTRO -->
           </tr>
         </tbody>
       </table>
     </div>
-    <div>
-    </div>
   </div>
+  <!-- FIM GERENCIAR REGISTROS -->
   <!-- PAGINAÇÃO -->
   <div>
     <nav aria-label="Page navigation example">
