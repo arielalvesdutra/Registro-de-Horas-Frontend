@@ -6,11 +6,11 @@ import { filter } from 'rxjs/operators';
 import { ifError } from 'assert';
 
 @Component({
-  selector: 'app-time-record-listing',
-  templateUrl: './time-record-listing.component.html',
-  styleUrls: ['./time-record-listing.component.css']
+  selector: 'app-manage-records',
+  templateUrl: './manage-records.component.html',
+  styleUrls: ['./manage-records.component.css']
 })
-export class TimeRecordListingComponent implements OnInit {
+export class ManageRecordsComponent implements OnInit {
 
   currentPage: number = 1
   numberOfPages: number
