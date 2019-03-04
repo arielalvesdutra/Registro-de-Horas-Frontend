@@ -13,34 +13,31 @@
       </h4>
 
       <div *ngIf="showFilters">
-        <div class="form-row">
-          <div class="col-12 col-md-6">
-
-            <div class="form-group">
-              <div class="input-group">
-                <input type="text" [(ngModel)]="titleFilter" class="form-control mb-2"
-                  placeholder="Digite o título do registro.">
+        <form [formGroup]="recordsFiltersForm" (ngSubmit)="getRecordsByFilters()">
+          <div class="form-row">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="titleFilter"
+                    placeholder="Digite o título do registro a ser filtrado.">
+                </div>
               </div>
             </div>
-
-          </div>
-          <div class="col-12 col-md-6">
-
-            <div class="form-group">
-              <div class="input-group">
-                <input type="date" [(ngModel)]="dateFilter" class="form-control  mb-2" placeholder="Digite o título.">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" type="date" formControlName="initDateFilter">
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="col search">
-            <button (click)="getRecordsByFilters()" class="btn">Buscar</button>
+          <div class="form-row">
+            <div class="col-12">
+              <button class="form-control btn-secondary btn mb-3">Pesquisar</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-
     </div>
   </div>
   <!-- FIM FILTRO -->
@@ -55,7 +52,8 @@
           <th width="10%">Duração</th>
           <th width="16%">Ações</th>
         </thead>
-        <tbody>
+        <!-- TEM REGISTROS -->
+        <tbody *ngIf="pageItems">
           <tr *ngFor='let record of pageItems'>
             <!-- LISTAR REGISTRO -->
             <td *ngIf="record.id !== recordEditId">
@@ -81,13 +79,13 @@
             <!-- FIM LISTAR REGISTRO -->
             <!-- ATUALIZAR REGISTRO -->
             <td *ngIf="record.id === recordEditId" colspan="5">
-              <form [formGroup]="updateRecordForm" (ngSubmit)="confirmUpdate(record)">
+              <form [formGroup]="recordUpdateForm" (ngSubmit)="confirmUpdate(record)">
                 <span class="input-group">
                   <input class="form-control" value="{{ record.title }}" formControlName="recordTitle">
                   <input class="form-control ml-2" value="{{ record.initDateTime }}"
                     formControlName="recordInitDateTime">
                   <input class="form-control ml-2" value="{{ record.endDateTime }}" formControlName="recordEndDateTime">
-                  <button class="btn btn-success btn-sm ml-2" title="Confirmar" [disabled]="!updateRecordForm.valid">
+                  <button class="btn btn-success btn-sm ml-2" title="Confirmar" [disabled]="!recordUpdateForm.valid">
                     <fa-icon icon="check-circle"></fa-icon>
                   </button>
                   <button (click)="cancelEdit()" class="btn btn-danger btn-sm" title="Cancelar">
@@ -99,6 +97,16 @@
             <!-- FIM ATUALIZAR REGISTRO -->
           </tr>
         </tbody>
+        <!-- FIM TEM REGISTROS -->
+        <!-- NÃO TEM REGISTROS -->
+        <tbody *ngIf="numberOfPages === 0">
+          <tr>
+            <td colspan="5">
+              Nenhum registro encontrado.
+            </td>
+          </tr>
+        </tbody>
+        <!-- FIM NÃO TEM REGISTROS -->
       </table>
     </div>
   </div>
@@ -114,5 +122,5 @@
       </ul>
     </nav>
   </div>
-
+  <!-- FIM PAGINAÇÃO -->
 </div>
