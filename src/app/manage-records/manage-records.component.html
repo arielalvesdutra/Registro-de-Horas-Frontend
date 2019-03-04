@@ -99,7 +99,7 @@
         </tbody>
         <!-- FIM TEM REGISTROS -->
         <!-- NÃO TEM REGISTROS -->
-        <tbody *ngIf="numberOfPages === 0">
+        <tbody *ngIf="!hasItems()">
           <tr>
             <td colspan="5">
               Nenhum registro encontrado.
