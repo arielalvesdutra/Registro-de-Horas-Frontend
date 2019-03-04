@@ -49,20 +49,3 @@ body {
     color: white;
     outline: 0;
 }
-
-.search button {
-    background-color: white;
-    color: gray;
-    opacity: 0.9;
-    margin-left: 10px;
-}
-
-.search button:hover {
-    background-color: white;
-    color: gray;
-    opacity: 1;
-}
-
-.search button:focus {
-    color: gray;
-}
