@@ -4,7 +4,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, throwError } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 
-import { TimeRecord } from './time-record.model'
+import { TimeRecord } from './entities/time-record'
 import { BACKEND } from './app.backend'
 
 const httpOptions = {

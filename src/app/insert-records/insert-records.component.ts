@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { RecordsService } from '../records.service'
-import { TimeRecord } from '../time-record.model'
+import { TimeRecord } from '../entities/time-record'
 
 @Component({
   selector: 'app-insert-records',

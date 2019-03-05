@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 import { ifError } from 'assert';
 
 import { RecordsService } from '../records.service'
-import { TimeRecord } from '../time-record.model'
+import { TimeRecord } from '../entities/time-record'
 
 @Component({
   selector: 'app-manage-records',
@@ -17,7 +17,7 @@ export class ManageRecordsComponent implements OnInit {
   currentPage: number = 1
   numberOfPages: number
   pageItems: TimeRecord[]
-  pageItensLimit: number = 5
+  pageItemsLimit: number = 5
   pages:number[]
 
   // todo: pode ser um subcomponente
@@ -64,7 +64,7 @@ export class ManageRecordsComponent implements OnInit {
   }
 
   private calculateNumberOfPages(): number {
-    return Math.ceil(this.records.length / this.pageItensLimit)
+    return Math.ceil(this.records.length / this.pageItemsLimit)
   }
 
   cancelEdit() {
@@ -118,8 +118,8 @@ export class ManageRecordsComponent implements OnInit {
       this.setCurrentPage(page)
     }
 
-    let initItem:number  = (this.pageItensLimit * this.currentPage) - 1 - (this.pageItensLimit-1)
-    let finalItem:number = (this.pageItensLimit * this.currentPage) 
+    let initItem:number  = (this.pageItemsLimit * this.currentPage) - 1 - (this.pageItemsLimit-1)
+    let finalItem:number = (this.pageItemsLimit * this.currentPage) 
     
     return this.records.slice(initItem,finalItem)
   }
