@@ -6,18 +6,18 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { InsertRecordsComponent } from './insert-records/insert-records.component';
 import { ManageRecordsComponent } from './manage-records/manage-records.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash, faEdit, faCheckCircle, faBan, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
-import { fas } from '@fortawesome/free-solid-svg-icons';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     InsertRecordsComponent,
-    ManageRecordsComponent
+    ManageRecordsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
