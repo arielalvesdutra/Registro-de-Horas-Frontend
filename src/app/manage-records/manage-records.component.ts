@@ -9,8 +9,7 @@ import { TimeRecord } from '../time-record.model'
 
 @Component({
   selector: 'app-manage-records',
-  templateUrl: './manage-records.component.html',
-  styleUrls: ['./manage-records.component.css']
+  templateUrl: './manage-records.component.html'
 })
 export class ManageRecordsComponent implements OnInit {
 

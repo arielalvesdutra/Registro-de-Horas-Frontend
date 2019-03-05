@@ -6,8 +6,7 @@ import { TimeRecord } from '../time-record.model'
 
 @Component({
   selector: 'app-insert-records',
-  templateUrl: './insert-records.component.html',
-  styleUrls: ['./insert-records.component.css']
+  templateUrl: './insert-records.component.html'
 })
 export class InsertRecordsComponent implements OnInit {
 
